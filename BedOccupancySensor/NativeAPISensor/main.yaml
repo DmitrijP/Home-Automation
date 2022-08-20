@@ -1,0 +1,52 @@
+esphome:
+  name: bed-occupancy-sensor
+  includes:
+    - custom_bed_sensor.h
+  libraries:
+    - bogde/HX711
+  project: 
+    name: "dmitrij_patuk.bed_occupancy_sensor"
+    version: "1.0.0"
+
+#=====================CONFIGURE BOARD =====================================
+    
+esp8266:
+  board: d1_mini
+  logging:
+
+#=====================CONFIGURE CONNECTIVITY =====================================
+
+api:
+  password: !secret api_password
+
+ota:
+  password: !secret ota_password
+
+wifi:
+  ssid: !secret wifi_ssid
+  password: !secret wifi_password
+
+  ap:
+    ssid: "Bed Occupancy Sensor"
+    password: !secret fallback_ap_password
+
+captive_portal:
+    
+#=====================REGISTER THE CUSTOM SENSOR ================================
+
+sensor:
+- platform: custom
+  lambda: |-
+    auto sensor = new CustomBedSensor();
+    App.register_component(sensor);
+    return {sensor->first_scale_sensor, sensor->second_scale_sensor};
+
+#=====================DISPLAY OUTPUT OF THE CUSTOM SENSOR =======================
+
+  sensors:
+  - name: "First Scale Sensor"
+    unit_of_measurement: kg
+    accuracy_decimals: 2
+  - name: "Second Scale Sensor"
+    unit_of_measurement: kg
+    accuracy_decimals: 2
