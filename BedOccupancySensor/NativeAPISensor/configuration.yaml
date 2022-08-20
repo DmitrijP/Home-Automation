@@ -1,7 +1,7 @@
 esphome:
   name: bed-occupancy-sensor
   includes:
-    - custom_bed_sensor.h
+    - sensor.h
   libraries:
     - bogde/HX711
   project: 
@@ -12,9 +12,9 @@ esphome:
     
 esp8266:
   board: d1_mini
-  logging:
 
 #=====================CONFIGURE CONNECTIVITY =====================================
+logger:
 
 api:
   password: !secret api_password
@@ -50,3 +50,4 @@ sensor:
   - name: "Second Scale Sensor"
     unit_of_measurement: kg
     accuracy_decimals: 2
+    
