@@ -1,5 +1,3 @@
-logger:
-
 api:
   password: !secret api_password
 
@@ -9,9 +7,10 @@ ota:
 wifi:
   ssid: !secret wifi_ssid
   password: !secret wifi_password
-
   ap:
     ssid: "Bed Occupancy Sensor"
     password: !secret fallback_ap_password
 
 captive_portal:
+
+logger:
