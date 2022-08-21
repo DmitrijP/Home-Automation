@@ -5,11 +5,12 @@ substitutions:
   project_version: "1.0.0"
 
 <<: !include base/d1_mini_base.yaml
-
 <<: !include base/base.yaml
    
+#Choose the communication platform. !!!ONLY USE MQTT OR API!!!
+#<<: !include base/mqtt.yaml
+<<: !include base/api.yaml
    
-#todo MQTT Integration
 sensor:
   - platform: custom
     lambda: |-
