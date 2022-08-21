@@ -1,7 +1,7 @@
 
 substitutions:
   name: bed-occupancy-sensor
-  project_name: "dmitrij_patuk.native_api_bed_occupancy_sensor"
+  project_name: "dmitrij_patuk.bed_occupancy_sensor"
   project_version: "1.0.0"
 
 <<: !include base/d1_mini_base.yaml
