@@ -22,9 +22,9 @@ sensor:
         unit_of_measurement: kg
         accuracy_decimals: 2
         filters:
-          - lambda: return x / 1;        # change the devider for calibration of the sensor
+          - lambda: return x / 1;        
       - name: "Second Scale Sensor"
         unit_of_measurement: kg
         accuracy_decimals: 2
         filters:
-          - lambda: return x / 1;        # change the devider for calibration of the sensor
+          - lambda: return x / 1;        
