@@ -1,8 +1,10 @@
 # Bed Occupancy Sensor
-Contains two implementations of a Bed Sensor that was build to measure the occupancy of a bed.
+Contains the code for my custom bed occupancy sensor to use for home automations that require the knowledge of 
+a bed being occupied.
 
-## Native API Sensor
-This version of the sensor is build to run with the native Home Assistant API and integrate directly into HA.
+<p align="center">
+  <img src="img/IMG_20220821_125341788.jpg" width="350" title="The Sensor Package"
+</p>
 
-## MQTT Sensor
-This version of the sensor is build to run with MQTT for non Home Assistant use cases.
+The sensor uses ESPHOME in combination with a ESP8266 controller and two HX711 sensors.\
+It is able to transmit the weight of two zones over MQTT or the native API.
