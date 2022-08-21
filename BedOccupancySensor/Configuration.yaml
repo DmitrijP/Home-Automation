@@ -1,7 +1,7 @@
 
 substitutions:
-  name: bed-occupancy-sensor
-  project_name: "dmitrij_patuk.bed_occupancy_sensor"
+  name: bed-occupancy
+  project_name: "dmitrij_patuk.bed_occupancy"
   project_version: "1.0.0"
 
 <<: !include base/d1_mini_base.yaml
@@ -16,11 +16,15 @@ sensor:
     lambda: |-
       auto sensor = new CustomBedSensor();
       App.register_component(sensor);
-      return {sensor->first_scale_sensor, sensor->second_scale_sensor};
+      return {sensor->first, sensor->second};
     sensors:
       - name: "First Scale Sensor"
         unit_of_measurement: kg
         accuracy_decimals: 2
+        filters:
+          - lambda: return x / 1;        # change the devider for calibration of the sensor
       - name: "Second Scale Sensor"
         unit_of_measurement: kg
         accuracy_decimals: 2
+        filters:
+          - lambda: return x / 1;        # change the devider for calibration of the sensor
