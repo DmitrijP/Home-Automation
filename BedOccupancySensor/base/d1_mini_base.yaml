@@ -1,7 +1,7 @@
 esphome:
   name: $name
   includes:
-    - ./customsensor/sensor.h
+    - ./custom_sensors/CustomBedSensor.h
   libraries:
     - bogde/HX711
   project: 
