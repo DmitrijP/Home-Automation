@@ -6,20 +6,16 @@ class CustomBedSensor : public PollingComponent {
   public:
   HX711 scale_1;  
   HX711 scale_2;
-  int sensor_1_factor = 0; 
-  int sensor_2_factor = 0; 
-  Sensor *first_scale_sensor = new Sensor();
-  Sensor *second_scale_sensor = new Sensor();
-  Sensor *factor1 = new Sensor();
-  Sensor *factor2 = new Sensor();
+  Sensor *first = new Sensor();
+  Sensor *second = new Sensor();
 
   CustomBedSensor() : PollingComponent(15000) {}
 
   float get_setup_priority() const override { return esphome::setup_priority::HARDWARE; }
   
   void setup() override {
-    setup_scale(scale_1, 2, 0, sensor_1_factor);
-    setup_scale(scale_2, 4, 5, sensor_2_factor);
+    setup_scale(scale_1, 2, 0);
+    setup_scale(scale_2, 4, 5);
   }
 
   void update() override {
@@ -27,10 +23,10 @@ class CustomBedSensor : public PollingComponent {
     read_scale(scale_2, 2);
   }
 
-  void setup_scale(HX711 scale, int dt, int sck, int scaleOffset){
+  void setup_scale(HX711 scale, int dt, int sck){
     scale.begin(dt, sck);   // Start scale on specified pins
     scale.wait_ready();  //Ensure scale is ready, this is a blocking function
-    scale.set_scale(scaleOffset);                                  
+    scale.set_scale();                                  
     scale.wait_ready();
     scale.tare();        // Tare scale on startup
     scale.wait_ready();
@@ -50,12 +46,10 @@ class CustomBedSensor : public PollingComponent {
     }
 
     if(number == 1){
-       factor1->publish_state(sensor_1_factor);
-       first_scale_sensor->publish_state(reading);
+       first->publish_state(reading);
     }
     if(number == 2){
-       factor2->publish_state(sensor_2_factor);
-       second_scale_sensor->publish_state(reading);
+       second->publish_state(reading);
     }
     scale.power_down();    
   }
